@@ -11,10 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// FRONT END PART ROUTING .....
+
+Route::get('/', 'FrontendController@index')->name('index');
+Route::get('/about', 'FrontendController@about')->name('about');
+Route::get('/tour', 'FrontendController@tour')->name('tour');
+Route::get('/hotel', 'FrontendController@hotel')->name('hotel');
+Route::get('/blog', 'FrontendController@blog')->name('blog');
+Route::get('/contact', 'FrontendController@contact')->name('contact');
+Route::get('/blog-single', 'FrontendController@blogDetail')->name('blogDetail');
+Route::get('/hotel-single', 'FrontendController@hotelDetail')->name('hotelDetail');
+
 
 Auth::routes();
+
+//DASHBOARD PART ROUTING
 
 Route::get('/home', 'HomeController@index')->name('home');
