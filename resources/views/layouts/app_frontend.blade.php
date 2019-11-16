@@ -47,7 +47,7 @@
                         <li class="nav-item {{ $hotel_active ?? '' }}"><a href="{!! route('hotel') !!}" class="nav-link">Hotels</a></li>
                         <li class="nav-item {{ $blog_active ?? '' }}"><a href="{!! route('blog') !!}" class="nav-link">Blog</a></li>
                         <li class="nav-item {{ $contact_active ?? '' }}"><a href="{!! route('contact') !!}" class="nav-link">Contact</a></li>
-                        <li class="nav-item cta"><a href="#" class="nav-link"><span>Add listing</span></a></li>
+                        <li class="nav-item cta"><a href="{!! route('home') !!}" class="nav-link"><span>Add listing</span></a></li>
                     </ul>
                 </div>
             </div>

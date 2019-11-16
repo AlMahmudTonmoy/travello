@@ -28,3 +28,7 @@ Auth::routes();
 //DASHBOARD PART ROUTING
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//blog controller
+Route::get('/home/blog', 'BlogController@index')->name('blog_backend');
+Route::get('/home/blog/add', 'BlogController@add')->name('add_blog');
