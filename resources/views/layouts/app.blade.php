@@ -90,7 +90,7 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
 
-        @yield('Javascript')
+        @yield('javascript')
 
     </body>
 
