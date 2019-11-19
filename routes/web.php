@@ -32,3 +32,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 //blog controller
 Route::get('/home/blog', 'BlogController@index')->name('blog_backend');
 Route::get('/home/blog/add', 'BlogController@add')->name('add_blog');
+Route::post('/home/blog/add/post', 'BlogController@addPost')->name('add_post');

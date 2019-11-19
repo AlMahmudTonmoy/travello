@@ -16,28 +16,36 @@
                 </div>
                 <div class=" card-body ">
 
-                    <form class="" action="" method="post">
-
+                    <form class="" action="{!! route('add_post') !!}" enctype="multipart/form-data" method="post">
+                        @csrf
                         <div class="row p-3 d-flex justify-content-between">
                             <div class="col-md-6">
                                 <label class="font-weight-bold">|-->Blog post name</label>
-                                <input type="text" class="form-control" name="name">
+
+                                <input type="text" class="form-control" name="post_name" value='val'>
+
+                                @error ('post_name')
+                                <div class="text-danger">***{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6">
                                 <label class="font-weight-bold">|-->Tags</label>
-                                <select name="tags b   " multiple="multiple" class="">
-                                    <option value="AK">Alaska</option>
-                                    <option value="AZ">Arizona</option>
-                                    <option value="AR">Arkansas</option>
-                                    <option value="CA">California</option>
-                                    <option value="CO">Colorado</option>
-                                    <option value="CT">Connecticut</option>
-                                    <option value="DE">Delaware</option>
-                                    <option value="FL">Florida</option>
-                                    <option value="GA">Georgia</option>
-                                    <option value="HI">Hawaii</option>
-                                    <option value="ID">Idaho</option>
+                                <select name="tags[]" multiple="multiple" class="">
+                                    <option value="1">Alaska</option>
+                                    <option value="2">Arizona</option>
+                                    <option value="3">Arkansas</option>
+                                    <option value="4">California</option>
+                                    <option value="5">Colorado</option>
+                                    <option value="6">Connecticut</option>
+                                    <option value="7">Delaware</option>
+                                    <option value="8">Florida</option>
+                                    <option value="9">Georgia</option>
+                                    <option value="10">Hawaii</option>
+                                    <option value="11">Idaho</option>
                                 </select>
+                                @error ('tags')
+                                <div class="text-danger">***{{ $message }}</div>
+                                @enderror
                             </div>
 
                         </div>
@@ -46,7 +54,7 @@
                             <textarea name="head" class="form-control">  </textarea>
                         </div>
                         <div class="form-group">
-                            <input type="file" class="form-control" name="head_img" accept="image/*" onchange="readURL(this);">
+                            <input type="file" class="form-control" name="head_img" onchange="readURL(this);">
                             <img hidden id="tenant_photo_viewer" class="img-fluid" src="#" alt="your image" />
                             <script>
                                 function readURL(input) {
