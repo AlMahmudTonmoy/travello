@@ -14,39 +14,53 @@
         <a href="#" class="btn-sm btn-danger">Trashed Blog</a>
 
     </div>
-    <div class="row justify-content-center">
-        <div class="col-md-12 border-top border-bottom ">
-            <div class="ml-md-3">
-                <table id="example" class="ui celled table ">
-                    <thead>
-                        <tr>
-                            <th class="bg-secondary text-light">Name</th>
-                            <th class="bg-secondary text-light">Position</th>
-                            <th class="bg-secondary text-light">Office</th>
-                            <th class="bg-secondary text-light">Age</th>
-                            <th class="bg-secondary text-light">Start date</th>
-                            <th class="bg-secondary text-light">Salary</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                        </tr>
-                    </tbody>
+    <div class="col-8 m-auto">
+        <table id="example" class="ui celled table ">
+            <thead>
+                <tr>
+                    <th class="bg-secondary text-light">SL</th>
+                    <th class="bg-secondary text-light">Post Name</th>
+                    <th class="bg-secondary text-light">Action</th>
 
-                </table>
-            </div>
-        </div>
+                </tr>
+            </thead>
+            <tbody>
+                {{-- <script type="text/javascript" src=""></script> --}}
+                @foreach ($posts as $post)
+                <tr>
+                    <td class="border text-center font-weight-bold font-italic"> {{ $loop->index + 1 }}</td>
+                    <td class="border"> {!! $post->post_name !!}</td>
+                    <td class="d-flex border">
+                        <form action="{!! route('add_section') !!}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $post->id }}">
+                            <input type="submit" class="btn btn-success mx-1 mt-1" value="Add Section">
+                        </form>
+                        <form action="#" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $post->id }}">
+                            <input type="submit" class="btn btn-primary mx-1 mt-1" value="Edit">
+                        </form>
+                        <form action="#" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $post->id }}">
+                            <input type="submit" class="btn btn-danger mx-1 mt-1" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+
+        </table>
     </div>
 </div>
+
+
+
 @endsection
 
-@section('Javascript')
+
+@section('js')
 
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.semanticui.min.js"></script>
@@ -58,4 +72,5 @@
         $('#example').DataTable();
     });
 </script>
+
 @endsection

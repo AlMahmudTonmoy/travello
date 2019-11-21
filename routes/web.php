@@ -33,3 +33,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/blog', 'BlogController@index')->name('blog_backend');
 Route::get('/home/blog/add', 'BlogController@add')->name('add_blog');
 Route::post('/home/blog/add/post', 'BlogController@addPost')->name('add_post');
+Route::post('/home/blog/add/post/section', 'BlogController@addPostSection')->name('add_section');
+Route::post('/home/blog/add/post/section/post', 'BlogController@addPostSectionPost')->name('add_section_post');

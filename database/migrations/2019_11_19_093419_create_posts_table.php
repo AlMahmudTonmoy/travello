@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->text('tail')->nullable();
             $table->string('head_img')->nullable();
             $table->string('tail_img')->nullable();
+            $table->integer('section_id')->nullable();
             $table->timestamps();
         });
     }

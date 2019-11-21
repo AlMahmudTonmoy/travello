@@ -24,16 +24,20 @@
                 <h2 class="mb-3">10 Tips For The Traveler</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus
                     ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
+                {{-- {!! $blog->head !!} --}}
                 <p>
                     <img src="{!! asset('frontend_assets/images/image_7.jpg') !!}" alt="" class="img-fluid">
+                    {{-- <img src="{!! asset('uploads/blog_images') !!}/{{ $blog->head_img }}" alt="" class="img-fluid"> --}}
                 </p>
                 <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda
                     eveniet eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p>
                 <h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
                 <p>Temporibus ad error suscipit exercitationem hic molestiae totam obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora maiores ex architecto voluptatum aut officia doloremque. Error dolore voluptas, omnis molestias odio
                     dignissimos culpa ex earum nisi consequatur quos odit quasi repellat qui officiis reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p>
+                {{-- {!! $blog->tail !!} --}}
                 <p>
                     <img src="{!! asset('frontend_assets/images/image_8.jpg') !!}" alt="" class="img-fluid">
+                    {{-- <img src="{!! asset('uploads/blog_images') !!}/{{ $blog->tail_img }}" alt="" class="img-fluid"> --}}
                 </p>
                 <p>Quisquam esse aliquam fuga distinctio, quidem delectus veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde aut non tenetur tempore, nisi culpa voluptate maiores officiis quis vel ab consectetur suscipit veritatis nulla
                     quos quia aspernatur perferendis, libero sint. Error, velit, porro. Deserunt minus, quibusdam iste enim veniam, modi rem maiores.</p>

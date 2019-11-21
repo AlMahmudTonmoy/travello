@@ -7,22 +7,66 @@
 @endsection
 
 @section('content')
+<div class="container mb-3 border-dark">
+    <div class="card border-dark " style="background:#eee">
+        <div class="card-header ">
+            <h2 class="text-center font-italic">Cureent Blog</h2>
+        </div>
+    </div>
+</div>
 <div class="container">
+    <div class="row">
+        <div class="col-md-8 ftco-animate">
+
+
+            {!! $post->head !!}
+            <p>
+                <img src="{!! asset('uploads/blog_images') !!}/{{ $post->head_img }}" alt="" class="img-fluid">
+            </p>
+            {!! $post->tail !!}
+            <p>
+                <img src="{!! asset('uploads/blog_images') !!}/{{ $post->tail_img }}" alt="" class="img-fluid">
+            </p>
+            @php
+            $counter = 1;
+            @endphp
+            @foreach ($sections as $section)
+
+            {!! $section->head !!}
+            <p>
+                <img src="{!! asset('uploads/blog_images') !!}/{{ $section->head_img }}" alt="" class="img-fluid">
+            </p>
+            {!! $section->tail !!}
+            <p>
+                <img src="{!! asset('uploads/blog_images') !!}/{{ $section->tail_img }}" alt="" class="img-fluid">
+            </p>
+            @php
+            $counter++;
+            @endphp
+            @endforeach
+        </div>
+    </div>
+</div>
+
+
+<div class="container mt-5">
     <div class="row">
         <div class="col">
             <div class=" card  mb-3 ">
                 <div class=" card-header p-2  font-italic ">
-                    <h4> Add Blog </h4>
+                    <h4> Add A Another Section To This Post </h4>
                 </div>
                 <div class=" card-body ">
 
-                    <form class="" action="{!! route('add_post') !!}" enctype="multipart/form-data" method="post">
+                    <form class="" action="{!! route('add_section_post') !!}" enctype="multipart/form-data" method="post">
                         @csrf
                         <div class="row p-3 d-flex justify-content-between">
                             <div class="col-md-6">
                                 <label class="font-weight-bold">|-->Blog post name</label>
 
-                                <input type="text" class="form-control" name="post_name" value='val'>
+                                <input type="text" class="form-control" name="post_name" value='{{ $post->post_name }} - Section - {{ $counter }}'>
+
+                                <input type="hidden" name="post_id" value="{{ $post->id }}">
 
                                 @error ('post_name')
                                 <div class="text-danger">***{{ $message }}</div>

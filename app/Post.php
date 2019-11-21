@@ -17,4 +17,8 @@ class Post extends Model
     {
         return $this->belongsToMany('App\Tag')->using('App\PostTag');
     }
+    public function sections()
+    {
+        return $this->hasMany('App\Post', 'section_id', 'id');
+    }
 }

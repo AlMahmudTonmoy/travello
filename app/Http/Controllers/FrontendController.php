@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 
 class FrontendController extends Controller
 {
@@ -32,7 +33,7 @@ class FrontendController extends Controller
     }
     public function blogDetail()
     {
-        return view('frontend_views.blog_detail', ['blog_active'=>'active']);
+        return view('frontend_views.blog_detail', ['blog_active'=>'active' ]);
     }
     public function hotelDetail()
     {
