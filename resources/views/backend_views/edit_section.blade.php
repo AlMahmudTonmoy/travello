@@ -7,99 +7,43 @@
 @endsection
 
 @section('content')
-<div class="container mb-3 border-dark">
-    <div class="card border-dark " style="background:#eee">
-        <div class="card-header ">
-            <h2 class="text-center font-italic">Cureent Blog</h2>
-        </div>
-    </div>
-</div>
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 ftco-animate">
-
-
-            {!! $post->head !!}
-            <p>
-                <img src="{!! asset('uploads/blog_images') !!}/{{ $post->head_img }}" alt="" class="img-fluid">
-            </p>
-            {!! $post->tail !!}
-            <p>
-                <img src="{!! asset('uploads/blog_images') !!}/{{ $post->tail_img }}" alt="" class="img-fluid">
-            </p>
-            @php
-            $counter = 1;
-            @endphp
-            @foreach ($sections as $section)
-
-            {!! $section->head !!}
-            <p>
-                <img src="{!! asset('uploads/blog_images') !!}/{{ $section->head_img }}" alt="" class="img-fluid">
-            </p>
-            {!! $section->tail !!}
-            <p>
-                <img src="{!! asset('uploads/blog_images') !!}/{{ $section->tail_img }}" alt="" class="img-fluid">
-            </p>
-            @php
-            $counter++;
-            @endphp
-            @endforeach
-        </div>
-    </div>
-</div>
-
-
-<div class="container mt-5">
     <div class="row">
         <div class="col">
             <div class=" card  mb-3 ">
                 <div class=" card-header p-2  font-italic ">
-                    <h4> Add A Another Section To This Post </h4>
+                    <h4> Edit Section </h4>
                 </div>
                 <div class=" card-body ">
 
-                    <form class="" action="{!! route('add_section_post') !!}" enctype="multipart/form-data" method="post">
+                    <form class="" action="{!! route('edit_section_post') !!}" enctype="multipart/form-data" method="post">
                         @csrf
                         <div class="row p-3 d-flex justify-content-between">
                             <div class="col-md-6">
                                 <label class="font-weight-bold">|-->Blog post name</label>
 
-                                <input type="text" class="form-control" name="post_name" value='{{ $post->post_name }} - Section - {{ $counter }}'>
+                                <input type="text" class="form-control" disabled value='{{ $post->post_name }}'>
 
-                                <input type="hidden" name="post_id" value="{{ $post->id }}">
-
-                                @error ('post_name')
-                                <div class="text-danger">***{{ $message }}</div>
-                                @enderror
                             </div>
+
                             <div class="col-md-6">
                                 <label class="font-weight-bold">|-->Tags</label>
-                                <select name="tags[]" multiple="multiple" class="">
-                                    <option value="1">Alaska</option>
-                                    <option value="2">Arizona</option>
-                                    <option value="3">Arkansas</option>
-                                    <option value="4">California</option>
-                                    <option value="5">Colorado</option>
-                                    <option value="6">Connecticut</option>
-                                    <option value="7">Delaware</option>
-                                    <option value="8">Florida</option>
-                                    <option value="9">Georgia</option>
-                                    <option value="10">Hawaii</option>
-                                    <option value="11">Idaho</option>
-                                </select>
-                                @error ('tags')
-                                <div class="text-danger">***{{ $message }}</div>
-                                @enderror
+                                <input type="text" name='tags' class="form-control" disabled value="{{ implode(" , ",$tag_array) }}">
                             </div>
-
                         </div>
 
                         <div class="form-group">
-                            <textarea name="head" class="form-control">  </textarea>
+                            <textarea name="head" class="form-control" rows="15"> {!! $post->head !!} </textarea>
                         </div>
                         <div class="form-group">
+                            <label for="" class="font-weight-bold font-italic">|--> Current Image</label> <br>
+                            <img src="{!! asset('uploads/blog_images') !!}/{{ $post->head_img }}" alt="No Current Image Available" class="img-fluid " width="800" height="533">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="font-weight-bold font-italic">|--> Add new one</label>
                             <input type="file" class="form-control" name="head_img" onchange="readURL(this);">
-                            <img hidden id="tenant_photo_viewer" class="img-fluid" src="#" alt="your image" />
+
+                            <img hidden id="tenant_photo_viewer" class="img-fluid form-control" src="#" alt="your image" />
                             <script>
                                 function readURL(input) {
                                     if (input.files && input.files[0]) {
@@ -114,10 +58,15 @@
                             </script>
                         </div>
                         <div class="form-group">
-                            <textarea name="tail" class="form-control">  </textarea>
+                            <textarea name="tail" class="form-control" rows="15"> {!! $post->tail !!} </textarea>
                         </div>
-
                         <div class="form-group">
+                            <label for="" class="font-weight-bold font-italic">|--> Current Image</label> <br>
+                            <img src="{!! asset('uploads/blog_images') !!}/{{ $post->tail_img }}" alt="No Current Image Available" class="img-fluid " width="800" height="533">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="font-weight-bold font-italic">|--> Add new one</label>
+
                             <input type="file" class="form-control" accept="image/*" name="tail_img" onchange="readURL2(this);">
 
                             <img hidden id="tenant_photo_viewer2" class="img-fluid" src="#" alt="your image" />
@@ -136,8 +85,14 @@
                         </div>
 
                         <div class="form-group text-right">
-
-                            <input type="submit" name="" class="btn btn-success " value="Add">
+                            {{-- sending old image referece  --}}
+                            <input type="hidden" name="old_head_img" value="{{ $post->head_img }}">
+                            <input type="hidden" name="old_tail_img" value="{{ $post->tail_img }}">
+                            {{-- sending old image referece --}}
+                            <input type="hidden" name="post_id" value="{{ $post->section_id }}">
+                            <input type="hidden" name="id" value="{{ $post->id }}">
+                            {{-- passing id --}}
+                            <input type="submit" name="" class="btn btn-success " value="Save">
 
                         </div>
                     </form>
@@ -159,7 +114,7 @@
 <script src="https://cdn.tiny.cloud/1/h4efslnnmjjd3jl8l4jnfm3k80d2yagce4iscoph730xpb0e/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
     tinymce.init({
-        selector: 'textarea'
+        selector: 'textarea',
     });
 </script>
 

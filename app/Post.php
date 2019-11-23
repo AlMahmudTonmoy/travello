@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
+    use SoftDeletes;
     protected $fillable =[
         'post_name',
         'head',
@@ -15,7 +17,7 @@ class Post extends Model
     ];
     public function tags()
     {
-        return $this->belongsToMany('App\Tag')->using('App\PostTag');
+        return $this->belongsToMany('App\Tag', 'post_tags');
     }
     public function sections()
     {

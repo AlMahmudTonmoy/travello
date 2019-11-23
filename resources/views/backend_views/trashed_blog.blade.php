@@ -9,13 +9,9 @@
 
 @section('content')
 <div class="container">
-    <div class="m-3 " align='right'>
-        <a href="{!! route('add_blog') !!}" class="btn-sm btn-success">Add Blog</a>
-        <a href="{!! route('trashed_blog') !!}" class="btn-sm btn-danger">Trashed Blog</a>
-
-    </div>
+    <h1 class="text-center border-bottom text-secondary">Trashed Blog</h1>
     <div class="col-8 m-auto">
-        <table id="example" class="ui celled table text-center">
+        <table id="example" class="ui celled table ">
             <thead>
                 <tr>
                     <th class="bg-secondary text-light">SL</th>
@@ -30,14 +26,17 @@
                 <tr>
                     <td class="border text-center font-weight-bold font-italic"> {{ $loop->index + 1 }}</td>
                     <td class="border"> {!! $post->post_name !!}</td>
-                    <td class="d-flex border justify-content-center">
+                    <td class="d-flex border">
 
-                        <a href="{!! route('blog_detail',$post->id) !!}" class="btn btn-primary mx-1 mt-1">Post details</a>
-
-                        <form action="{!! route('delete_blog') !!}" method="post">
+                        <form action="{!! route('force_blog') !!}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{ $post->id }}">
-                            <input type="submit" class="btn btn-danger mx-1 mt-1" value="Delete">
+                            <input type="submit" class="btn btn-danger mx-1 mt-1" value="Force">
+                        </form>
+                        <form action="{!! route('restore_blog') !!}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $post->id }}">
+                            <input type="submit" class="btn btn-success mx-1 mt-1" value="Restore">
                         </form>
                     </td>
                 </tr>

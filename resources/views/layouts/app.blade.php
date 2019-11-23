@@ -42,6 +42,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('blog_backend') }}">Blog</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tag_backend') }}">Tags</a>
+                            </li>
                             @endauth
                         </ul>
 

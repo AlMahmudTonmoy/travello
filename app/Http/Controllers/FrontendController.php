@@ -25,15 +25,15 @@ class FrontendController extends Controller
     }
     public function blog()
     {
-        return view('frontend_views.blog', ['blog_active'=>'active']);
+        return view('frontend_views.blog', ['blog_active'=>'active', 'posts'=>Post::where('section_id', null)->get()]);
     }
     public function contact()
     {
         return view('frontend_views.contact', ['contact_active'=>'active']);
     }
-    public function blogDetail()
+    public function blogDetail($id)
     {
-        return view('frontend_views.blog_detail', ['blog_active'=>'active' ]);
+        return view('frontend_views.blog_detail', ['blog_active'=>'active','post'=>Post::findOrFail($id) ]);
     }
     public function hotelDetail()
     {

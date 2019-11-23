@@ -1,28 +1,91 @@
 @extends('layouts.app')
 @section('css')
 
-
-
-<link href="{!! asset('css/multiselect.css') !!}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('content')
+<div class="container mb-3 border-dark">
+    <div class="card border-dark " style="">
+        <div class="card-header ">
+            <h2 class="text-center font-italic">Cureent Blog</h2>
+        </div>
+    </div>
+</div>
 <div class="container">
+    <div class="row">
+        <div class="col-md-8 ftco-animate">
+
+
+            {!! $post->head !!}
+            <p>
+                <img src="{!! asset('uploads/blog_images') !!}/{{ $post->head_img }}" alt="" class="img-fluid">
+            </p>
+            {!! $post->tail !!}
+            <p>
+                <img src="{!! asset('uploads/blog_images') !!}/{{ $post->tail_img }}" alt="" class="img-fluid">
+            </p>
+            <div class="d-flex justify-content-end m-3">
+                <form class="m-1" action="{!! route('edit_post') !!}" method="post">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $post->id }}">
+                    <input type="submit" class="btn-sm btn-primary" value="Edit Main Post">
+                </form>
+            </div>
+
+            @foreach ($post->sections as $section)
+
+            {!! $section->head !!}
+            @if ($section->head_img)
+            <p>
+                <img src="{!! asset('uploads/blog_images') !!}/{{ $section->head_img }}" alt="" class="img-fluid">
+            </p>
+            @endif
+            {!! $section->tail !!}
+
+            @if ($section->tail_img)
+            <p>
+                <img src="{!! asset('uploads/blog_images') !!}/{{ $section->tail_img }}" alt="" class="img-fluid">
+            </p>
+            @endif
+            <div class="d-flex justify-content-end m-3">
+                <form class="m-1" action="{!! route('edit_section') !!}" method="post">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $section->id }}">
+                    <input type="submit" class="btn-sm btn-primary" value="Edit">
+                </form>
+                <form class="m-1" action="{!! route('delete_section') !!}" method="post">
+                    @csrf
+                    <input type="hidden" name="section_id" value="{{ $section->id }}">
+                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                    <input type="submit" class="btn-sm btn-danger" value="Delete">
+                </form>
+            </div>
+
+            @endforeach
+        </div>
+    </div>
+</div>
+
+
+<div class="container mt-5">
     <div class="row">
         <div class="col">
             <div class=" card  mb-3 ">
                 <div class=" card-header p-2  font-italic ">
-                    <h4> Add Blog </h4>
+                    <h4> Add An Another Section To This Post </h4>
                 </div>
                 <div class=" card-body ">
 
-                    <form class="" action="{!! route('add_post') !!}" enctype="multipart/form-data" method="post">
+                    <form class="" action="{!! route('add_section_post') !!}" enctype="multipart/form-data" method="post">
                         @csrf
                         <div class="row p-3 d-flex justify-content-between">
                             <div class="col-md-6">
                                 <label class="font-weight-bold">|-->Blog post name</label>
 
-                                <input type="text" class="form-control" name="post_name">
+                                <input type="text" class="form-control" disabled value='{{ $post->post_name }} - Section'>
+                                <input type="hidden" class="form-control" name="post_name" value='{{ $post->post_name }} - Section'>
+
+                                <input type="hidden" name="post_id" value="{{ $post->id }}">
 
                                 @error ('post_name')
                                 <div class="text-danger">***{{ $message }}</div>
@@ -30,13 +93,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="font-weight-bold">|-->Tags</label>
-                                <select name="tags[]" multiple="multiple" class="">
-
-                                    @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}">{{ $tag->tag }}</option>
-                                    @endforeach
-
-                                </select>
+                                <input type="text" name='tags' class="form-control" disabled value="{{ implode(" , ",$tag_array) }}">
                                 @error ('tags')
                                 <div class="text-danger">***{{ $message }}</div>
                                 @enderror
@@ -45,7 +102,7 @@
                         </div>
 
                         <div class="form-group">
-                            <textarea name="head" class="form-control" rows="15">{{ old('head') }} </textarea>
+                            <textarea name="head" class="form-control" rows="15"> {{ old('head') }} </textarea>
                         </div>
                         <div class="form-group">
                             <input type="file" class="form-control" name="head_img" onchange="readURL(this);">
@@ -64,7 +121,7 @@
                             </script>
                         </div>
                         <div class="form-group">
-                            <textarea name="tail" class="form-control" rows="15"> {{ old('tail') }} </textarea>
+                            <textarea name="tail" class="form-control" rows="15">{{ old('tail') }} </textarea>
                         </div>
 
                         <div class="form-group">
@@ -113,15 +170,5 @@
     });
 </script>
 
-{{-- for multi select portion --}}
 
-
-<script src="{!! asset('js/multiselect.js') !!}"></script>
-<script>
-    var x = (window.matchMedia("(max-width: 1000px)").matches) ? (window.matchMedia("(max-width: 400px)").matches) ? 1 : 2 : 3
-    $('select[multiple]').multiselect({
-        columns: x,
-        placeholder: 'Select options'
-    });
-</script>
 @endsection
